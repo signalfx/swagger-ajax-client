@@ -12,12 +12,21 @@
   <script>
     $.getJSON('./schema.json', function(schema){
       var api = swaggerAjaxClient(schema);
+      window.api = api;
 
-      api.pet.getPetById(2);
+      var id = Math.round(Math.random() * 100)
+      var x = api.pet.addPet({body: {id: id, name:'bob'}}).then(
+        function(response){
+          console.log('addPet response', response);
 
-      api.pet.getPetById(2, function(response){
-        console.log('response', response.responseJSON);
-      });
+          api.pet.getPetById(id).then(function(pet){
+            console.log('getPetById response', pet);
+          });
+        }, 
+        function(e){
+          console.error(e + '');
+        }
+      );
     });
   </script>
 </body>
