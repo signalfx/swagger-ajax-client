@@ -1,17 +1,15 @@
 {
-  "name": "seed",
+  "name": "swagger-ajax-client",
   "version": "0.1.0",
-  "private": true,
   "description": "",
   "keywords": [],
-  "main": "./src/js/seed.js",
+  "main": "./src/client.js",
   "devDependencies": {
     "gulp": "^3.8.5",
     "boilerplate-gulp": "^0.1.0"
   },
   "directories": {
-    "jsSrc": "./src/js",
-    "cssSrc": "./src/css",
+    "jsSrc": "./src",
     "build": "./build",
     "dist": "./dist",
     "reports": "./reports",
@@ -31,15 +29,15 @@
   "licenses": [
     {
       "type": "Apache License 2.0",
-      "url": "https://github.com/user/repo/blob/master/LICENSE-APACHE2"
+      "url": "https://github.com/signalfuse/swagger-ajax-client/blob/master/LICENSE-APACHE2"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/user/repo.git"
+    "url": "git://github.com/signalfuse/swagger-ajax-client.git"
   },
   "bugs": {
-    "url": "https://github.com/user/repo/issues"
+    "url": "https://github.com/signalfuse/swagger-ajax-client/issues"
   },
-  "homepage": "https://github.com/user/repo"
+  "homepage": "https://github.com/signalfuse/swagger-ajax-client"
 }
