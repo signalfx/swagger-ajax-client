@@ -1,6 +1,9 @@
 # Swagger Ajax Client
 
-Creates a XHR client API for [Swagger API Specification](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md) schema (which can be generated with [fetch-swagger-schema](https://github.com/signalfuse/fetch-swagger-schema)).
+Create XHR clients for [Swagger API Specifications](https://github.com/wordnik/swagger-spec/blob/master/versions/1.2.md).
+
+Given a schema object, this tool returns an api object which can be used to interact with the API server
+described by the schema. The schema can easily be generated using  [fetch-swagger-schema](https://github.com/signalfuse/fetch-swagger-schema)).
 
 ## Examples
 
