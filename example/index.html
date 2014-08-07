@@ -14,18 +14,21 @@
       var api = swaggerAjaxClient(schema);
 
       function getOrCreate(id, name){
-        return api.pet.getPetById(id).then(function(response){
-          if(!response.code) response;
-        
-          // Pet doesn't exist, create one.
-          var pet = {id: id, name: name};
-          return api.pet.addPet({id: id, name: name}).then(function(){
-            return pet;
-          });
+        return api.pet.getPetById(id).catch(function(response){
+          // If pet doesn't exist, create a new one.
+          if(response.status === 404){
+            var pet = {id: id, name: name};
+            return api.pet.addPet(pet).then(function(){
+              return pet;
+            });
+          }
+
+          // Unknown error
+          console.error(response.error.toString());
         });
       }
 
-      getOrCreate(2, 'bob').then(function(pet){
+      getOrCreate(23, 'bob').then(function(pet){
         console.log('Got pet:', pet);
       }, function(error){
         console.error(error.toString());

@@ -43,18 +43,29 @@ function requestHandler(error, request){
     if(options.onprogress) xhr.onprogress = options.onprogress;
 
     xhr.onloadend = function(){
+      var data = this.response;
       var contentType = this.getResponseHeader('Content-Type');
 
-      var data = this.response;
       if(contentType && contentType.indexOf('application/json') !== -1){
         try {
           data = JSON.parse(data);
-          resolve(data);
-        } catch(e){
-          reject(e, this.response);
+        } catch(error){
+          reject({ 
+            error: error,
+            status: this.status,
+            data: data
+          });
         }
+      }
+
+      if(this.status < 200 || this.status >= 300){
+        reject({
+          error: error,
+          status: this.status,
+          data: data
+        });
       } else {
-        resolve(this.response);
+        resolve(data);
       }
       
       if(options.onloadend) options.onloadend.call(this);
