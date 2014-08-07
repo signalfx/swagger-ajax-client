@@ -1,16 +1,17 @@
 'use strict';
 
 // Promise polyfill
-require('../bower_components/es6-promise/promise');
-
-var clientGenerator = require('../bower_components/swagger-client-generator/dist/swagger-client-generator');
+var Promise = require('es6-promise').Promise;
+var clientGenerator = require('swagger-client-generator');
 
 module.exports = function(schema){
   return clientGenerator(schema, requestHandler);
 };
 
 // For mocking during unit testing
-module.exports.XMLHttpRequest = XMLHttpRequest;
+if(typeof XMLHttpRequest !== 'undefined'){
+  module.exports.XMLHttpRequest = window.XMLHttpRequest;
+}
 
 function requestHandler(error, request){
   var XMLHttpRequest = module.exports.XMLHttpRequest;

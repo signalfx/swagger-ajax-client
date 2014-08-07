@@ -33,7 +33,5 @@
     "url": "git@github.com:signalfuse/swagger-ajax-client.git"
   },
   "dependencies": {
-    "swagger-client-generator": "^0.1.0",
-    "es6-promise": "^1.0.0"
   }
 }
