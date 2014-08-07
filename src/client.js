@@ -1,64 +1,52 @@
 'use strict';
 
-var clientGenerator = require('../bower_components/swagger-client-generator/dist/swagger-client-generator');
+// Promise polyfill
+require('../bower_components/es6-promise/promise');
 
-module.exports = clientGenerator;
+var clientGenerator = require('../bower_components/swagger-client-generator/dist/swagger-client-generator');
 
 module.exports = function(schema){
   return clientGenerator(schema, requestHandler);
 };
 
-var events = [
-  'abort',
-  'error',
-  'load',
-  'loadend',
-  'loadstart',
-  'progress',
-  'readystatechange',
-  'timeout'
-];
+// For mocking during unit testing
+module.exports.XMLHttpRequest = XMLHttpRequest;
 
-function requestHandler(error, requestData){
+function requestHandler(error, request){
+  var XMLHttpRequest = module.exports.XMLHttpRequest;
   return new Promise(function(resolve, reject){
     if(error) return reject(error);
-    
-    var method = requestData.method;
-    var url = requestData.url;
-    var body = requestData.body;
-    var headers = requestData.headers;
 
-    var options = requestData.options;
+    var method = request.method;
+    var url = request.url;
+    var body = request.body;
+    var headers = request.headers;
+
+    var options = request.options;
     var async = ('async' in options)? options.async : true;
-    var withCredentials = ('withCredentials' in options)? options.withCredentials : false;
     var xhr = new XMLHttpRequest();
-    
-    xhr.open(method, url, async)
-    xhr.withCredentials = withCredentials;
-    xhr.timeout = 1;
+
+    xhr.open(method, url, async);
+
     if(headers){
       Object.keys(headers).forEach(function(header){
         xhr.setRequestHeader(header, headers[header]);
       });
     }
-
-    xhr.onabort = function(){
-      console.error('aborted', error, arguments);
-    };
-    xhr.onerror = function(){
-      console.error('error', error, arguments);
-    };
-    xhr.load = function(){};
-
-    xhr.timeout = function(){
-      console.error('timeout', error, arguments);
-    };
+    
+    if(options.withCredentials) xhr.withCredentials = options.withCredentials;
+    if(options.timeout) xhr.timeout = options.timeout;
+    if(options.onabort) xhr.onabort = options.onabort;
+    if(options.onerror) xhr.onerror = options.onerror;
+    if(options.onload) xhr.onload = options.onload;
+    if(options.ontimeout) xhr.ontimeout = options.ontimeout;
+    if(options.onprogress) xhr.onprogress = options.onprogress;
 
     xhr.onloadend = function(){
       var contentType = this.getResponseHeader('Content-Type');
 
       var data = this.response;
-      if(contentType.indexOf('application/json') !== -1){
+      if(contentType && contentType.indexOf('application/json') !== -1){
         try {
           data = JSON.parse(data);
           resolve(data);
@@ -68,6 +56,8 @@ function requestHandler(error, requestData){
       } else {
         resolve(this.response);
       }
+      
+      if(options.onloadend) options.onloadend.call(this);
     };
 
     xhr.send(body);
