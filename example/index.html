@@ -12,21 +12,24 @@
   <script>
     $.getJSON('./schema.json', function(schema){
       var api = swaggerAjaxClient(schema);
-      window.api = api;
 
-      var id = Math.round(Math.random() * 100)
-      var x = api.pet.addPet({body: {id: id, name:'bob'}}).then(
-        function(response){
-          console.log('addPet response', response);
-
-          api.pet.getPetById(id).then(function(pet){
-            console.log('getPetById response', pet);
+      function getOrCreate(id, name){
+        return api.pet.getPetById(id).then(function(response){
+          if(!response.code) response;
+        
+          // Pet doesn't exist, create one.
+          var pet = {id: id, name: name};
+          return api.pet.addPet({id: id, name: name}).then(function(){
+            return pet;
           });
-        }, 
-        function(e){
-          console.error(e + '');
-        }
-      );
+        });
+      }
+
+      getOrCreate(2, 'bob').then(function(pet){
+        console.log('Got pet:', pet);
+      }, function(error){
+        console.error(error.toString());
+      });
     });
   </script>
 </body>
