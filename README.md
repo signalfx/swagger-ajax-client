@@ -13,6 +13,10 @@ by using swaggerAjaxClient:
 ```javascript
 // Assuming the variable schema exists
 var api = swaggerAjaxClient(schema);
+
+// for apiKey authorization use: api.auth('my-token')
+// for basicAuth use: api.auth('username', 'password')
+
 api.pet.getPetById(id).then(function(pet){
   console.log(pet);
 });
