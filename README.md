@@ -5,6 +5,16 @@ Create XHR clients for [Swagger API Specifications](https://github.com/wordnik/s
 Given a schema object, this tool returns an api object which can be used to interact with the API server
 described by the schema. The schema can easily be generated using  [fetch-swagger-schema](https://github.com/signalfuse/fetch-swagger-schema)).
 
+# Usage
+To use, include one of these files in your application: 
+* *[swagger-ajax-client.js](https://raw.githubusercontent.com/signalfuse/swagger-ajax-client/master/dist/swagger-ajax-client.js)*
+* *[swagger-ajax-client.js.min](https://raw.githubusercontent.com/signalfuse/swagger-ajax-client/master/dist/swagger-ajax-client.min.js)*, a minified version ([source map](https://raw.githubusercontent.com/signalfuse/swagger-ajax-client/master/dist/swagger-ajax-client.min.js.map))
+
+You may also `bower install swagger-ajax-client` to install using bower. Once you've included the script, you can use the swaggerAjaxClient function to generate the api using a given schema object.
+
+Schemas can be generated using [fetch-swagger-schema](https://github.com/signalfuse/fetch-swagger-schema).
+
+
 ## Examples
 
 First, a simple example. Let's say you saved a schema json file, then loaded it
