@@ -1,6 +1,6 @@
 {
   "name": "swagger-ajax-client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "keywords": [],
   "main": "./src/client.js",
@@ -30,17 +30,17 @@
   "licenses": [
     {
       "type": "Apache License 2.0",
-      "url": "https://github.com/signalfuse/swagger-ajax-client/blob/master/LICENSE-APACHE2"
+      "url": "https://github.com/signalfx/swagger-ajax-client/blob/master/LICENSE-APACHE2"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/signalfuse/swagger-ajax-client.git"
+    "url": "git://github.com/signalfx/swagger-ajax-client.git"
   },
   "bugs": {
-    "url": "https://github.com/signalfuse/swagger-ajax-client/issues"
+    "url": "https://github.com/signalfx/swagger-ajax-client/issues"
   },
-  "homepage": "https://github.com/signalfuse/swagger-ajax-client",
+  "homepage": "https://github.com/signalfx/swagger-ajax-client",
   "dependencies": {
     "swagger-client-generator": "^0.2.0",
     "es6-promise": "^1.0.0"
