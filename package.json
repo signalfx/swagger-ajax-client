@@ -1,6 +1,6 @@
 {
   "name": "swagger-ajax-client",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "keywords": [],
   "main": "./src/client.js",
@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/signalfx/swagger-ajax-client",
   "dependencies": {
-    "swagger-client-generator": "^0.2.0",
+    "swagger-client-generator": "^0.2.10",
     "es6-promise": "^1.0.0"
   }
 }
