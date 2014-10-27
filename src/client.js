@@ -1,7 +1,6 @@
 'use strict';
 
-// Promise polyfill
-var Promise = require('es6-promise').Promise;
+var PromisePolyfill = require('es6-promise').Promise;
 var clientGenerator = require('swagger-client-generator');
 
 module.exports = function(schema){
@@ -15,7 +14,7 @@ if(typeof XMLHttpRequest !== 'undefined'){
 
 function requestHandler(error, request){
   var XMLHttpRequest = module.exports.XMLHttpRequest;
-  return new Promise(function(resolve, reject){
+  return new PromisePolyfill(function(resolve, reject){
     if(error) return reject(error);
 
     var method = request.method;
